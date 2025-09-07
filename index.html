@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Reclame Aqui Cianorte</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app card" id="root">
+    <div class="brand">
+      <div class="logo"><img src="https://www.eccobandeiras.com.br/image/cache/catalog/fotos/cianorte%20130-1111x740.jpg" alt="bandeira cianorte"></div>
+      <div>
+        <h1>Reclame Aqui Cianorte</h1>
+        <div class="small">Ajude a cidade registrando denúncias, reclamações e pedidos de melhoria por bairro</div>
+      </div>
+    </div>
+
+    <!-- AUTH / REGISTER & LOGIN -->
+    <div id="authView" class="auth" style="margin-top:18px">
+      <div class="card" id="registerCard">
+        <h3>Cadastro</h3>
+        <div class="small">Crie sua conta para registrar ocorrências</div>
+        <div style="margin-top:10px">
+          <label>Nome completo</label>
+          <input id="reg_name" type="text" placeholder="Seu nome completo" />
+        </div>
+        <div style="margin-top:10px">
+          <label>E-mail</label>
+          <input id="reg_email" type="email" placeholder="seu@exemplo.com" />
+        </div>
+        <div style="margin-top:10px">
+          <label>Senha</label>
+          <div style="position:relative">
+            <input id="reg_pass" type="password" />
+            <span class="eye" id="eye_reg">👁️</span>
+          </div>
+        </div>
+        <div style="margin-top:10px">
+          <label>Confirmar senha</label>
+          <div style="position:relative">
+            <input id="reg_pass_confirm" type="password" />
+            <span class="eye" id="eye_reg_confirm">👁️</span>
+          </div>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <button id="btnRegister">Cadastrar</button>
+          <button id="btnClear" class="ghost">Limpar</button>
+        </div>
+        <div style="margin-top:12px">
+          <button id="btnGoogle" class="ghost">Continuar com o Google</button>
+        </div>
+      </div>
+
+      <div class="card" id="loginCard">
+        <h3>Entrar</h3>
+        <div class="small">Já tem conta? Faça login</div>
+        <div style="margin-top:10px">
+          <label>E-mail</label>
+          <input id="login_email" type="email" />
+        </div>
+        <div style="margin-top:10px">
+          <label>Senha</label>
+          <div style="position:relative">
+            <input id="login_pass" type="password" />
+            <span class="eye" id="eye_login">👁️</span>
+          </div>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <button id="btnLogin">Entrar</button>
+          <button id="btnGuest" class="ghost">Entrar como convidado</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- APP VISTA -->
+    <div id="appView" class="hidden" style="margin-top:18px">
+      <div class="main">
+        <div class="left">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div>
+              <strong id="welcomeName"></strong>
+              <div class="small">Bem-vindo — registre uma nova ocorrência abaixo</div>
+            </div>
+            <div class="counts">
+              <div class="count">Denúncias: <span id="countDen">0</span></div>
+              <div class="count">Reclamações: <span id="countRec">0</span></div>
+              <div class="count">Pedidos: <span id="countPed">0</span></div>
+            </div>
+          </div>
+
+          <div style="margin-top:12px" class="card">
+            <h4>Registrar ocorrência</h4>
+
+            <div style="margin-top:6px">
+              <label>Setor (assinale para entrar)</label>
+              <div class="sectors">
+                <div class="sector" data-type="denuncia">🚨 Denúncia</div>
+                <div class="sector" data-type="reclamacao">📣 Reclamação</div>
+                <div class="sector" data-type="pedido">🛠️ Pedido de melhoria</div>
+              </div>
+            </div>
+
+            <div style="margin-top:8px">
+              <label>Assunto (sugestões)</label>
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <label><input type="checkbox" class="tag" value="Trânsito" /> Trânsito</label>
+                <label><input type="checkbox" class="tag" value="Lixo" /> Lixo</label>
+                <label><input type="checkbox" class="tag" value="Segurança" /> Segurança</label>
+                <label><input type="checkbox" class="tag" value="Barulho" /> Barulho</label>
+                <label><input type="checkbox" class="tag" value="Roubos" /> Roubos</label>
+                <label>Outro: <input id="tag_other" type="text" placeholder="Especifique outro assunto" style="width:200px"/></label>
+              </div>
+            </div>
+
+            <div style="margin-top:8px">
+              <label>Falar como</label>
+              <div class="row">
+                <label><input type="radio" name="who" value="user" checked/> <span id="radioName">Seu nome</span></label>
+                <label><input type="radio" name="who" value="anon"/> Anônimo</label>
+              </div>
+            </div>
+
+            <div style="margin-top:8px">
+              <label>Descrição do problema</label>
+              <textarea id="desc" rows="4" placeholder="Descreva o que aconteceu"></textarea>
+            </div>
+
+            <div style="margin-top:8px">
+              <label>Bairro</label>
+              <input id="bairro" type="text" placeholder="Bairro onde ocorreu" />
+            </div>
+
+            <div style="margin-top:8px">
+              <label>Data do ocorrido</label>
+              <input id="data_ocorrencia" type="date" />
+            </div>
+
+            <div style="margin-top:8px">
+              <label>Anexar arquivo (pdf, docx, imagens). Arquivos grandes serão limitados.</label>
+              <input id="file_input" type="file" />
+              <div class="file-preview" id="filePreview"></div>
+            </div>
+
+            <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end">
+              <button id="btnSubmit">Enviar</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:12px">
+            <h4>Registros recentes</h4>
+            <div id="recordsList" class="list">
+              <div class="small">Nenhum registro ainda — use o formulário acima.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="card">
+            <h4>Configurações</h4>
+            <div style="margin-top:8px">
+              <label>Tema</label>
+              <div style="display:flex;gap:8px;margin-top:6px">
+                <button id="themeLight" class="ghost">Claro</button>
+                <button id="themeDark" class="ghost">Escuro</button>
+              </div>
+            </div>
+
+            <div style="margin-top:12px">
+              <label>Conta</label>
+              <div style="margin-top:8px">
+                <button id="btnDelete" class="ghost">Excluir conta</button>
+              </div>
+            </div>
+
+            <div style="margin-top:12px">
+              <label>Ajuda</label>
+              <div class="small">Envie provas e descrições. Comentários ofensivos são bloqueados automaticamente.</div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:12px">
+            <h4>Sobre</h4>
+            <div class="small">Este site é uma ferramenta comunitária para os moradores de Cianorte. Não substitui órgãos oficiais.</div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="card" style="margin-top:12px">Feito para Cianorte — registros são armazenados localmente no navegador.</footer>
+    </div>
+
+    <div class="settings" title="Configurações rápidas">
+      <div style="font-weight:600;margin-bottom:6px">Configurações</div>
+      <button id="openSettings" class="ghost">Abrir painel</button>
+      <button id="logout" class="ghost">Sair</button>
+      <div style="font-size:12px;margin-top:8px;color:var(--muted)">Tema atual: <span id="currentTheme">Claro</span></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
